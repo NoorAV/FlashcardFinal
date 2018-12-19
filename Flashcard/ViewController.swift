@@ -244,6 +244,7 @@ class ViewController: UIViewController {
         updateNextPrevButtons()
         
         animateCardOut()
+        
     }
     
 
