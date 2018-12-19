@@ -79,6 +79,7 @@ class ViewController: UIViewController {
         {
             frontLabel.isHidden = false
         }
+    
         else
         {
             frontLabel.isHidden = true
