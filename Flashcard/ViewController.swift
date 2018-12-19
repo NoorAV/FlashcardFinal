@@ -245,28 +245,6 @@ class ViewController: UIViewController {
         animateCardOut()
     }
     
-    @IBAction func didTapOnDelete(_ sender: Any) {
-        
-        let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete it?", preferredStyle: .actionSheet)
-        
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in
-            self.deleteCurrentFlashcard()
-        }
-        alert.addAction(deleteAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alert.addAction(cancelAction)
-    }
-    
-    func deleteCurrentFlashcard(){
-        
-    
-    }
-    
-    
-    
-    
 
 }
 
