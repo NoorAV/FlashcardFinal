@@ -69,6 +69,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapOnFlashcard(_ sender: Any) {
+        
+        flipFlashcard()
+        
+    }
+    
+    func flipFlashcard(){
         if(frontLabel.isHidden == true)
         {
             frontLabel.isHidden = false
@@ -78,6 +84,47 @@ class ViewController: UIViewController {
             frontLabel.isHidden = true
         }
         
+        UIView.transition(with: card, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            self.frontLabel.isHidden = true
+        })
+    }
+    
+    func animateCardOut(){
+        
+        UIView.animate(withDuration: 0.3, animations: {self.card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)}, completion: {finished in
+            
+            self.updateLabels()
+            
+            self.animateCardIn()
+        })
+    }
+    
+    func animateCardIn(){
+        
+        card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)
+        
+        UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateCardOutPrev(){
+        
+        UIView.animate(withDuration: 0.3, animations: {self.card.transform = CGAffineTransform.identity.translatedBy(x: 300.0, y: 0.0)}, completion: {finished in
+            
+            self.updateLabels()
+            
+            self.animateCardInPrev()
+        })
+    }
+    
+    func animateCardInPrev(){
+        
+        card.transform = CGAffineTransform.identity.translatedBy(x: -300.0, y: 0.0)
+        
+        UIView.animate(withDuration: 0.3){
+            self.card.transform = CGAffineTransform.identity
+        }
     }
     
     func updateFlashcard(question: String, answer: String, extraAnswer1: String, extraAnswer2: String)
@@ -181,6 +228,10 @@ class ViewController: UIViewController {
         updateLabels()
         
         updateNextPrevButtons()
+        
+        animateCardOutPrev()
+        
+        
     }
     
     @IBAction func didTapOnNext(_ sender: Any) {
@@ -190,7 +241,30 @@ class ViewController: UIViewController {
         updateLabels()
         
         updateNextPrevButtons()
+        
+        animateCardOut()
     }
+    
+    @IBAction func didTapOnDelete(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Delete flashcard", message: "Are you sure you want to delete it?", preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { action in
+            self.deleteCurrentFlashcard()
+        }
+        alert.addAction(deleteAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(cancelAction)
+    }
+    
+    func deleteCurrentFlashcard(){
+        
+    
+    }
+    
+    
     
     
 
